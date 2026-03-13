@@ -6,14 +6,6 @@ A simple and easy-to-use rope physics simulation library, implemented with Posit
 
 ![绳索物理仿真演示](assets/rope_demo.gif)
 
-## 特点
-
-- **简单**：API 设计简洁，易于理解和使用
-- **分离**：物理引擎与可视化完全分离
-- **高效**：使用 NumPy 进行数值计算，性能优异
-- **可拓展**：模块化设计，支持功能扩展
-- **真实感**：基于 PBD 算法，模拟效果逼真
-
 ## 安装
 
 ### 前置要求
