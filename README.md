@@ -2,6 +2,10 @@
 
 一个简单易用的绳索物理仿真库，基于 Position-Based Dynamics (PBD) 和 Verlet 积分实现，使用 MuJoCo 作为可视化后端。
 
+A simple and easy-to-use rope physics simulation library, implemented with Position-Based Dynamics (PBD) and Verlet integration, using MuJoCo as the visualization backend.
+
+![绳索物理仿真演示](assets/rope_demo.gif)
+
 ## 特点
 
 - **简单**：API 设计简洁，易于理解和使用
@@ -63,13 +67,14 @@ visualizer.shutdown()
 ### 起重机演示
 
 ```bash
-python examples/crane_demo.py
+python main.py
 ```
 
 控制方式：
 - `A / D` 控制轨道 Y 轴
 - `W / S` 控制小车 X 轴
-- `Q / E` 控制升降
+- `Q / E` 控制绳索伸长/缩短
+- `R / T` 控制锚点升降
 - 鼠标左键拖动 → 旋转视角
 - 鼠标右键拖动 → 平移视角
 - 滚轮 → 缩放
@@ -158,7 +163,7 @@ class RopeVisualizer:
 2. 距离约束迭代求解
 3. 最小化求解器优化结果
 
-## 未来计划
+## 未来计划（可能会）
 
 - [ ] 添加碰撞检测和响应
 - [ ] 支持多种绳索材质

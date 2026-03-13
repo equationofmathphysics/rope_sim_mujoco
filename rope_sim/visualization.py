@@ -87,15 +87,15 @@ class RopeVisualizer:
         self.window_size = window_size
         self.title = title
 
-        # 创建 MuJoCo 模型
-        xml = build_rope_xml(rope_physics.num_segments)
+        # 创建 MuJoCo 模型 - 必须使用 max_segments 以支持伸长
+        xml = build_rope_xml(rope_physics.max_segments)
         self.model = mujoco.MjModel.from_xml_string(xml)
         self.data = mujoco.MjData(self.model)
 
         # 获取 mocap 体 ID
         self.hoist_id = get_mocap_id(self.model, "hoist_marker")
         self.clamp_id = get_mocap_id(self.model, "clamp")
-        self.rope_ids = [get_mocap_id(self.model, f"rope_{i}") for i in range(rope_physics.num_segments - 1)]
+        self.rope_ids = [get_mocap_id(self.model, f"rope_{i}") for i in range(rope_physics.max_segments - 1)]
 
         # 初始化 GLFW
         if not glfw.init():
@@ -137,13 +137,17 @@ class RopeVisualizer:
         self.data.mocap_pos[self.hoist_id] = anchor
         self.data.mocap_quat[self.hoist_id] = np.array([1, 0, 0, 0])
 
-        # 更新绳索可视化
+        # 更新绳索可视化 - 只更新 active segments
         positions = self.rope_physics.positions
-        for i in range(self.rope_physics.num_segments - 1):
+        for i in range(self.rope_physics.active_segments - 1):
             p1 = positions[i]
             p2 = positions[i + 1]
             self.data.mocap_pos[self.rope_ids[i]] = (p1 + p2) * 0.5
             self.data.mocap_quat[self.rope_ids[i]] = quat_from_z_to_vec(p2 - p1)
+
+        # 隐藏未 active 的 segments（设置到很远的地方）
+        for i in range(self.rope_physics.active_segments - 1, self.rope_physics.max_segments - 1):
+            self.data.mocap_pos[self.rope_ids[i]] = np.array([0, 0, -1000])
 
         # 更新末端夹具
         self.data.mocap_pos[self.clamp_id] = self.rope_physics.end_point
