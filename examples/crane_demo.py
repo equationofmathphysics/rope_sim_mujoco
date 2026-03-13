@@ -50,7 +50,11 @@ def main():
         length=INITIAL_LENGTH,
         segment_length=0.1,
         max_length=MAX_LENGTH,
-        iterations=8
+        iterations=50,
+        stretch_damping=0.98,  # 伸缩阻尼（轴向）：越接近1.0伸缩弹性越大
+        bend_damping=0.98,     # 弯曲/摆动阻尼（横向）：越接近1.0摆动时间越长
+        node_mass=0.1,         # 每个绳索节点的质量（kg）
+        end_mass=10.0          # 末端球的质量（kg），值越大下垂越明显
     )
 
     # 创建可视化器
