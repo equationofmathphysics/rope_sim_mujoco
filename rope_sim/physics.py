@@ -25,6 +25,7 @@ class RopePhysics:
         iterations: PBD 约束求解的迭代次数
         damping: 阻尼系数（减少弹性）
         end_mass: 末端负载质量（让绳索受重物拉下垂）
+        end_inertia: 末端负载的惯性张量（3x3矩阵或对角惯性值）
     """
 
     def __init__(
@@ -39,6 +40,7 @@ class RopePhysics:
         bend_damping: float = 0.98,    # 弯曲/摆动阻尼（垂直于绳索方向）
         node_mass: float = 0.1,         # 每个绳索节点的质量（kg）
         end_mass: float = 0.0,          # 末端重物的质量（kg）
+        end_inertia: any = None,        # 末端负载的惯性张量
     ):
         self.segment_length = segment_length
         self.max_segments = int(round(max_length / segment_length))
@@ -167,7 +169,7 @@ class RopePhysics:
                         # 中间节点质量相同
                         self.positions[i] += correction * 0.5
                         self.positions[i + 1] -= correction * 0.5
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     @property
     def end_point(self):
         """获取绳索终点位置。
