@@ -35,7 +35,7 @@ def main():
     print("=" * 50)
 
     # 物理引擎参数
-    INITIAL_LENGTH = 10.0
+    INITIAL_LENGTH = 5.0
     MAX_LENGTH = 20.0
     MIN_LENGTH = 3.0
     MOVE_SPEED = 0.05
@@ -46,7 +46,7 @@ def main():
     rope = RopePhysics(
         anchor=initial_anchor,
         length=INITIAL_LENGTH,
-        segment_length=0.1,
+        segment_length=0.3,
         max_length=MAX_LENGTH,
         iterations=8,
         end_mass=50.0  # 设置夹钳的质量（kg），增加这个值会使绳索下垂更明显

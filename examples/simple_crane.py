@@ -52,7 +52,7 @@ XML = """
         <!-- 不可见质量体，满足 MuJoCo 要求 -->
         <geom type="box" size="0.001 0.001 0.001" rgba="0 0 0 0" mass="0.001"/>
         <geom type="box" size="0.32 0.32 0.14"
-              rgba="0.25 0.65 0.40 1" mass="200.0"/>
+              rgba="0.25 0.65 0.40 1" mass="10.0"/>
 
         <!-- 杆根部铰链：先绕 Y 轴（对应 X 方向倾斜） -->
         <body name="hinge_y" pos="0 0 0.14">
